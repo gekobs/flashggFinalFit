@@ -24,6 +24,32 @@ globalReplacementMap["example"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
 globalReplacementMap["example"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
 
 
+# Example analysis which with cats Untagged_Tag0,VBF_Tag0
+globalReplacementMap['ggtt_nonRes'] = od()
+globalReplacementMap['ggtt_nonRes']['procWV'] = "HH2ggtautau"
+globalReplacementMap['ggtt_nonRes']['catWV'] = "HH2ggtautau_SR1"
+globalReplacementMap['ggtt_nonRes']['catWV'] = "HH2ggtautau_SR2"
+
+globalReplacementMap['ggtt_nonRes']['procWV'] = "HHggTauTau"
+globalReplacementMap['ggtt_nonRes']['catWV'] = "HHggTauTau_SR1"
+globalReplacementMap['ggtt_nonRes']['catWV'] = "HHggTauTau_SR2"
+# For RIGHT VERTEX SCENARIO:
+#  * default you should add is diagonal process from given category 
+#  * if few events in diagonal process then may need to change the category aswell (see catRVMap)
+#  * map must contain entry for all cats being processed (for replacement proc and cat)
+globalReplacementMap['ggtt_nonRes']['procRVMap'] = od()
+#globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR1"] = "HH2ggtautau"
+#globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR2"] = "HH2ggtautau"
+
+globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR1"] = "HHggTauTau"
+globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR2"] = "HHggTauTau"
+
+# Replacement category for RV fit
+globalReplacementMap['ggtt_nonRes']["catRVMap"] = od()
+globalReplacementMap['ggtt_nonRes']["catRVMap"]["SR1"] = "SR1"
+globalReplacementMap['ggtt_nonRes']["catRVMap"]["SR2"] = "SR2"
+
+
 # STXS analysis
 globalReplacementMap['STXS'] = od()
 # For WRONG VERTEX SCENARIO:

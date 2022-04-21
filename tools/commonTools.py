@@ -80,6 +80,7 @@ def signalFromFileName(_fileName):
   elif "THQ" in _fileName: p = "thq"
   elif "THW" in _fileName: p = "thw"
   elif "bbH" in _fileName: p = "bbh"
+  elif "ggf" in _fileName: p = "ggf"
   else:
     print " --> [ERROR]: cannot extract production mode from input file name. Please update tools.commonTools.signalFromFileName"
     exit(1)

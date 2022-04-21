@@ -1,6 +1,15 @@
 models = {
   "mu_inclusive":"",
 
+	"ggtt_resBkg":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
+  --PO \"map=.*/HH2ggtautau.*:r[1,0,2]\"",
+
+	#"ggtt_resBkg_syst":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
+	#--PO \"map=.*/HHggTauTau.*:r[1,0,2]\"",
+
+ "ggtt_resBkg_syst":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
+  --PO \"map=.*/HHgg*.*:r[1,0,2]\"",
+
   "mu":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
 --PO \"map=.*/ggH.*:r_ggH[1,0,2]\" \
 --PO \"map=.*/bbH.*:r_ggH[1,0,2]\" \

@@ -18,8 +18,9 @@ def get_options():
   parser.add_option("--inputWSFile", dest="inputWSFile", default=None, help="Input multipdf RooWorkspace file")
   parser.add_option("--cat", dest="cat", default="RECO_0J_PTH_0_10_Tag0", help="Analysis category")
   parser.add_option("--unblind", dest="unblind", default=False, action="store_true", help="Unblind signal region")
-  parser.add_option("--blindingRegion", dest="blindingRegion", default="116,134", help="Region in xvar to blind")
+  parser.add_option("--blindingRegion", dest="blindingRegion", default="120,130", help="Region in xvar to blind")
   parser.add_option("--doZeroes", dest="doZeroes", default=False, action="store_true", help="Add error of unity to zero bins to show on plot")
+  parser.add_option("--doSignal", dest="doSignal", default=False, action="store_true", help="who knows")
   parser.add_option("--ext", dest="ext", default='', help="Extension for saving")
   parser.add_option("--mass", dest="mass", default=125.38, help="Higgs mass")
   parser.add_option("--xvar", dest="xvar", default="CMS_hgg_mass,m_{#gamma#gamma},GeV", help="X-variable: name,title,units")
@@ -104,6 +105,7 @@ for ibin in range(1,hists['data'].GetNbinsX()+1):
   hists_ratio['data'].SetBinContent(ibin,bval-bkgval)
   hists_ratio['data'].SetBinError(ibin,berr)
 
+doSignal = False
 if opt.inputSignalWSFile is not None: 
   doSignal = True
   cat = opt.cat
@@ -292,6 +294,6 @@ lat2.SetTextSize(0.045*padSizeRatio)
 lat2.DrawLatex(0.87,0.91,"Best fit B function subtracted")
 
 canv.Update()
-canv.SaveAs("/eos/home-j/jlangfor/www/CMS/hgg/stxs_runII/Dec20/final_new/AN/background_models_new/bmodel_%s.pdf"%(cat))
-canv.SaveAs("/eos/home-j/jlangfor/www/CMS/hgg/stxs_runII/Dec20/final_new/AN/background_models_new/bmodel_%s.png"%(cat))
+canv.SaveAs("/home/users/fsetti/public_html/HH2ggtautau/flashggFinalFit/10Apr2022/bkg_fits/bmodel_%s.pdf"%(cat))
+canv.SaveAs("/home/users/fsetti/public_html/HH2ggtautau/flashggFinalFit/10Apr2022/bkg_fits/bmodel_%s.png"%(cat))
 

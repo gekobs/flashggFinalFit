@@ -10,6 +10,29 @@ globalXSBRMap = od()
 #globalXSBRMap['example']['decay'] = {'mode':'constant','factor':1}
 #globalXSBRMap['example']['PROCNAME'] = {'mode':'constant','factor':0.001}
 
+globalXSBRMap['ggtt_nonRes'] = od()
+globalXSBRMap['ggtt_nonRes']['decay'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['HH2ggtautau'] 					= {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['HHggTauTau'] 						= {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['HHggWW'] 								= {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['HHggWWdileptonic'] 		= {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['HHggWWsemileptonic'] 	= {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['ggHH_kl_0_kt_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['ggHH_kl_1_kt_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['ggHH_kl_2p45_kt_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['ggHH_kl_5_kt_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_0p5_C2V_1_kl_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_1p5_C2V_1_kl_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_1_C2V_1_kl_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_1_C2V_0_kl_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_1_C2V_1_kl_0'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_1_C2V_1_kl_2'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['qqHH_CV_1_C2V_2_kl_1'] = {'mode':'constant','factor':1}
+globalXSBRMap['ggtt_nonRes']['VH'] = {'mode':'VH'}
+globalXSBRMap['ggtt_nonRes']['ggH'] = {'mode':'ggH'}
+globalXSBRMap['ggtt_nonRes']['ttH'] = {'mode':'ttH'}
+globalXSBRMap['ggtt_nonRes']['VBFH'] = {'mode':'qqH'}
+
 # For case of inclusive production mode then have no additional factor beyond V branching ratios
 globalXSBRMap['example'] = od()
 globalXSBRMap['example']['decay'] = {'mode':'hgg'}
