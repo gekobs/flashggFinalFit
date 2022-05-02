@@ -30,9 +30,9 @@ globalReplacementMap['ggtt_nonRes']['procWV'] = "HH2ggtautau"
 globalReplacementMap['ggtt_nonRes']['catWV'] = "HH2ggtautau_SR1"
 globalReplacementMap['ggtt_nonRes']['catWV'] = "HH2ggtautau_SR2"
 
-globalReplacementMap['ggtt_nonRes']['procWV'] = "HHggTauTau"
-globalReplacementMap['ggtt_nonRes']['catWV'] = "HHggTauTau_SR1"
-globalReplacementMap['ggtt_nonRes']['catWV'] = "HHggTauTau_SR2"
+globalReplacementMap['ggtt_nonRes']['procWV'] = "ttHHggbb"
+globalReplacementMap['ggtt_nonRes']['catWV'] = "ttHHggbb_SR1"
+globalReplacementMap['ggtt_nonRes']['catWV'] = "ttHHggbb_SR2"
 # For RIGHT VERTEX SCENARIO:
 #  * default you should add is diagonal process from given category 
 #  * if few events in diagonal process then may need to change the category aswell (see catRVMap)
@@ -41,8 +41,8 @@ globalReplacementMap['ggtt_nonRes']['procRVMap'] = od()
 #globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR1"] = "HH2ggtautau"
 #globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR2"] = "HH2ggtautau"
 
-globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR1"] = "HHggTauTau"
-globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR2"] = "HHggTauTau"
+globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR1"] = "ttHHggbb"
+globalReplacementMap['ggtt_nonRes']["procRVMap"]["SR2"] = "ttHHggbb"
 
 # Replacement category for RV fit
 globalReplacementMap['ggtt_nonRes']["catRVMap"] = od()

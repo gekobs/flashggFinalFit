@@ -8,7 +8,12 @@ models = {
 	#--PO \"map=.*/HHggTauTau.*:r[1,0,2]\"",
 
  "ggtt_resBkg_syst":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
-  --PO \"map=.*/HHgg*.*:r[1,0,2]\"",
+  --PO \"map=.*/ttHHggbb.*:r[1,0,2]\" \
+  --PO \"map=.*/ttHHggWW.*:r[1,0,2]\" \
+  --PO \"map=.*/ttHHggTauTau.*:r[1,0,2]\"",
+# "ggtt_resBkg_syst":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
+#  --PO \"map=.*/HHgg*.*:r[1,0,2]\"",
+
 
   "mu":"-P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel \
 --PO \"map=.*/ggH.*:r_ggH[1,0,2]\" \

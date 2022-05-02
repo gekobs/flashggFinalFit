@@ -22,14 +22,14 @@
 theory_systematics = [
                 # Normalisation uncertainties: enter interpretations
                 {'name':'BR_hgg','title':'BR_hgg','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':"0.98/1.021"},
-                {'name':'ggHH_xsec','title':'ggHH_xsec','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':"0.936/1.045"},
+                {'name':'ggHH_xsec','title':'ggHH_xsec','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':"theory_uncertainties/thu_gghh.json"},
 
 								{'name':'QCDscale_ggH','title':'QCDscale_ggH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_ggh.json'},
 								{'name':'QCDscale_qqH','title':'QCDscale_qqH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_qqh.json'},
 								{'name':'QCDscale_VH','title':'QCDscale_VH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_vh.json'},
-								{'name':'QCDscale_ttH','title':'QCDscale_ttH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_tth.json'},
+                {'name':'QCDscale_ttH','title':'QCDscale_ttH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_tth.json'},
 								
-								{'name':'pdf_Higgs_ggH','title':'pdf_Higgs_ggH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_ggh.json'}, 
+								{'name':'pdf_Higgs_ggH','title':'pdf_Higgs_ggH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_ggh.json'},
 								{'name':'pdf_Higgs_qqH','title':'pdf_Higgs_qqH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_qqh.json'},
 								{'name':'pdf_Higgs_VH','title':'pdf_Higgs_VH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_vh.json'},
 								{'name':'pdf_Higgs_ttH','title':'pdf_Higgs_ttH','type':'constant','prior':'lnN','correlateAcrossYears':1,'value':'theory_uncertainties/thu_tth.json'},
@@ -56,6 +56,8 @@ experimental_systematics = [
                 {'name':'weight_electron_id_sf_SelectedElectron','title':'CMS_hgg_ElectronIDSF','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'weight_muon_id_sfSTAT_SelectedMuon','title':'CMS_hgg_MuonIDSF_STAT','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'weight_muon_id_sfSYS_SelectedMuon','title':'CMS_hgg_MuonIDSF_SYS','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                {'name':'weight_muon_iso_sfSTAT_SelectedMuon','title':'CMS_hgg_MuonISOSF_STAT','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                {'name':'weight_muon_iso_sfSYS_SelectedMuon','title':'CMS_hgg_MuonISOSF_SYS','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'weight_trigger_sf','title':'CMS_hgg_TriggerSF','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'JER','title':'JER','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'JES','title':'JES','type':'factory','prior':'lnN','correlateAcrossYears':0},
@@ -64,6 +66,16 @@ experimental_systematics = [
                 {'name':'MET_Unclustered','title':'MET_Unclustered','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'Muon_pt','title':'Muon_pt','type':'factory','prior':'lnN','correlateAcrossYears':0},
                 {'name':'Tau_pt','title' :'Tau_pt','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_jes','title':'CMS_hgg_btag_deepjet_sf_jes','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_lf','title':'CMS_hgg_btag_deepjet_sf_lf','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_hf','title':'CMS_hgg_btag_deepjet_sf_hf','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_lfstats1','title':'CMS_hgg_btag_deepjet_sf_lfstats1','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_lfstats2','title':'CMS_hgg_btag_deepjet_sf_lfstats2','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_hfstats1','title':'CMS_hgg_btag_deepjet_sf_hfstats1','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_hfstats2','title':'CMS_hgg_btag_deepjet_sf_hfstats2','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_cferr1','title':'CMS_hgg_btag_deepjet_sf_cferr1','type':'factory','prior':'lnN','correlateAcrossYears':0},
+                #{'name':'weight_btag_deepjet_sf_SelectedJet_cferr2','title':'CMS_hgg_btag_deepjet_sf_cferr2','type':'factory','prior':'lnN','correlateAcrossYears':0},
+
 ]
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,6 +85,7 @@ experimental_systematics = [
 
 signal_shape_systematics = [
                 {'name':'MCScale_scale','title':'MCScale_scale','type':'signal_shape','mode':'scales','mean':'0.0','sigma':'1.0'},
+                {'name':'MCSmear_smear','title':'MCSmear_smear','type':'signal_shape','mode':'smears','mean':'0.0','sigma':'1.0'},
                 {'name':'material','title':'material','type':'signal_shape','mode':'scalesCorr','mean':'0.0','sigma':'1.0'},
                 {'name':'fnuf','title':'fnuf','type':'signal_shape','mode':'scalesCorr','mean':'0.0','sigma':'1.0'},
 ]

@@ -6,7 +6,6 @@ backgroundScriptCfg = {
   
   # Setup
   'inputWSDir':'/home/users/iareed/ttHHggbb/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/%s/Data/ws/'%(_tag),
-  #'inputWSDir':'/home/users/fsetti/ic_flashgg/CMSSW_10_2_13/src/flashggFinalFit/files_systs/%s/Data/ws/'%(_tag), # location of 'allData.root' file
   'cats':'auto', # auto: automatically inferred from input ws
   'catOffset':0, # add offset to category numbers (useful for categories from different allData.root files)  
   'ext':'%s'%(_tag), # extension to add to output directory

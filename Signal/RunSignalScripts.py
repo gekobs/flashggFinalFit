@@ -81,7 +81,10 @@ if options['mode'] not in ['fTest','getEffAcc','getDiagProc','calcPhotonSyst','s
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Extract list of filenames
 WSFileNames = extractWSFileNames(options['inputWSDir'])
-if not WSFileNames: leave()
+
+if not WSFileNames:
+  print('No filenames found')
+  leave()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # If proc/cat == auto. Extract processes and categories

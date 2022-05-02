@@ -163,6 +163,7 @@ for mp in opt.massPoints.split(","):
 
 # Check if nominal yield > threshold (or if +ve sum of weights). If not then use replacement proc x cat
 if( datasetRVForFit[MHNominal].numEntries() < opt.replacementThreshold  )|( datasetRVForFit[MHNominal].sumEntries() < 0. ):
+  print('Looking for replacements')
   nominal_numEntries = datasetRVForFit[MHNominal].numEntries()
   procReplacementFit, catReplacementFit = rMap['procRVMap'][opt.cat], rMap['catRVMap'][opt.cat]
   for mp in opt.massPoints.split(","):
