@@ -70,6 +70,7 @@ def initialiseXSBR():
   xsbr['constant'] = np.asarray(xsbr['constant'])
   # If ggZH and ZH in production modes then make qqZH numpy array
   if('ggZH' in productionModes)&('ZH' in productionModes): xsbr['qqZH'] = xsbr['ZH']-xsbr['ggZH']
+  if('WH' in productionModes)&('ZH' in productionModes): xsbr['VH'] = xsbr['WH']+xsbr['ZH']
   return xsbr
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   

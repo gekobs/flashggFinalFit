@@ -118,7 +118,8 @@ for year in years:
       _model = "%s_%s:%s_%s"%(outputWSName__,sqrts__,outputWSObjectTitle__,_id)
 
     # Extract rate from lumi
-    _rate = float(lumiMap[year])*1000
+    # _rate = float(lumiMap[year])*1000
+    _rate =   1000
 
     # Add signal process to dataFrame:
     print " --> Adding to dataFrame: (proc,cat) = (%s,%s)"%(_proc,_cat)
@@ -171,6 +172,7 @@ if not opt.skipCOWCorr: data['nominal_yield_COWCorr'] = '-'
 
 # Add columns in dataFrame for systematic yield variations
 if opt.doSystematics:
+  print("\n\nDoing syst")
   # Extract type of systematic using factoryType function (defined in tools.calcSystematics)
   #  * a_h: anti-symmetric RooDataHist (2 columns in dataframe)
   #  * a_w: anti-symmetric weight in nominal RooDataSet (2 columns in dataframe)

@@ -28,6 +28,27 @@ globalXSBRMap['example']['THQ'] = {'mode':'tHq'}
 globalXSBRMap['example']['THW'] = {'mode':'tHW'}
 # ...
 
+globalXSBRMap['eft'] = od()                                       
+globalXSBRMap['eft']['decay'] = {'mode':'constant','factor':1}    
+globalXSBRMap['eft']['ttHHheftSM'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft1'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft2'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft3'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft4'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft5'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft6'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft7'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft8'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft9'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft10'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft11'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft12'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['ttHHheft13'] = {'mode':'constant','factor':1}
+globalXSBRMap['eft']['VH'] = {'mode':'VH'} 
+globalXSBRMap['eft']['ggH'] = {'mode':'ggH'}
+globalXSBRMap['eft']['ttH'] = {'mode':'ttH'}
+globalXSBRMap['eft']['VBFH'] = {'mode':'qqH'}
+
 # STXS analysis: add factor for bin composition
 globalXSBRMap['STXS'] = od()
 globalXSBRMap['STXS']['decay'] = {'mode':'hgg'}

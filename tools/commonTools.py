@@ -46,6 +46,7 @@ def extractListOfCats( _listOfWSFileNames ):
 def extractListOfCatsFromData( _fileName ):
   f = ROOT.TFile(_fileName)
   ws = f.Get(inputWSName__)
+  # print ("WS ",ws.ls() )
   allData = ws.allData()
   cats = []
   for d in allData:

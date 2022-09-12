@@ -46,7 +46,7 @@ def get_options():
   parser.add_option('--skipVertexScenarioSplit', dest='skipVertexScenarioSplit', default=False, action="store_true", help="Skip vertex scenario split")
   parser.add_option('--skipZeroes', dest='skipZeroes', default=False, action="store_true", help="Skip proc x cat is numEntries = 0., or sumEntries < 0.")
   # For systematics
-  parser.add_option('--skipSystematics', dest='skipSystematics', default=False, action="store_true", help="Skip shape systematics in signal model")
+  parser.add_option('--skipSystematics', dest='skipSystematics', default=True, action="store_true", help="Skip shape systematics in signal model")
   parser.add_option('--useDiagonalProcForSyst', dest='useDiagonalProcForSyst', default=False, action="store_true", help="Use diagonal process for systematics (requires diagonal mapping produced by getDiagProc script)")
   parser.add_option("--scales", dest='scales', default='', help="Photon shape systematics: scales")
   parser.add_option("--scalesCorr", dest='scalesCorr', default='', help='Photon shape systematics: scalesCorr')
@@ -166,6 +166,7 @@ if( datasetRVForFit[MHNominal].numEntries() < opt.replacementThreshold  )|( data
   nominal_numEntries = datasetRVForFit[MHNominal].numEntries()
   procReplacementFit, catReplacementFit = rMap['procRVMap'][opt.cat], rMap['catRVMap'][opt.cat]
   for mp in opt.massPoints.split(","):
+    print("trying to access this ws {}".format("%s/output*M%s*%s.root"%(opt.inputWSDir,mp,procReplacementFit)))
     WSFileName = glob.glob("%s/output*M%s*%s.root"%(opt.inputWSDir,mp,procReplacementFit))[0]
     f = ROOT.TFile(WSFileName,"read")
     inputWS = f.Get(inputWSName__)

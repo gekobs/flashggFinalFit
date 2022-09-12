@@ -67,7 +67,7 @@ def factoryType(d,s):
     ws = f.Get(inputWSName__)
     dataHistUp = "%s_%sUp01sigma"%(r.nominalDataName,s['name'])
     dataHistDown = "%s_%sDown01sigma"%(r.nominalDataName,s['name'])
-
+    
     # Check if syst is var (i.e. weight) in workspace
     if ws.allVars().selectByName("%s*"%(s['name'])).getSize():
       nWeights = ws.allVars().selectByName("%s*"%(s['name'])).getSize()
@@ -91,7 +91,7 @@ def factoryType(d,s):
       f.Close()
 
   # If never found:
-  print " --> [ERROR] systematic %s: cannot extract type in factoryType function. Doesn't match requirement for (anti)-symmetric weights or anti-symmetric histograms. Leaving..."
+  print " --> [ERROR] systematic %s: cannot extract type in factoryType function. Doesn't match requirement for (anti)-symmetric weights or anti-symmetric histograms. Leaving..."%s['name']
   sys.exit(1)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

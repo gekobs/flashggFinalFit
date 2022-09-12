@@ -108,13 +108,13 @@ theoryWeightColumns = {}
 for ts, nWeights in theoryWeightContainers.iteritems(): theoryWeightColumns[ts] = ["%s_%g"%(ts[:-1],i) for i in range(0,nWeights)] # drop final s from container name
 
 # If year == 2018, add HET
-if opt.year == '2018': systematics.append("JetHEM")
+# if opt.year == '2018': systematics.append("JetHEM")
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # UPROOT file
 f = uproot.open(opt.inputTreeFile)
-if inputTreeDir == '': listOfTreeNames == f.keys()
+if inputTreeDir == '': listOfTreeNames = f.keys()
 else: listOfTreeNames = f[inputTreeDir].keys()
 # If cats = 'auto' then determine from list of trees
 if cats == 'auto':
@@ -148,7 +148,9 @@ for cat in cats:
   print "    * tree: %s"%treeName
   # Extract tree from uproot
   t = f[treeName]
-  if len(t) == 0: continue
+  if len(t) == 0: 
+    print("\n\n\ You have 0 events in your {} category!".format(cat))
+    continue
   
   # Convert tree to pandas dataframe
   dfs = {}
