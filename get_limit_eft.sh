@@ -5,7 +5,7 @@ set -x
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 # source /vols/grid/cms/setup.sh
 
-tag=testing
+tag=HEFT_BRggbb
 trees=/home/users/azecchin/Analysis/FinalFit/CMSSW_10_2_13/src/flashggFinalFit/files_systs/$tag
 
 cmsenv
@@ -97,7 +97,7 @@ make_datacard(){
    #python RunYields.py --inputWSDirMap 2016=${trees}/ws_signal_2016,2017=${trees}/ws_signal_2017,2018=${trees}/ws_signal_2018 --cats auto --procs "ggHHkl0kt1,ggHHkl1kt1,ggHHkl2p45kt1,ggHHkl5kt1,ggHHkl0kt1WWdilep,ggHHkl1kt1WWdilep,ggHHkl2p45kt1WWdilep,ggHHkl5kt1WWdilep,ggH,ttH,VH,VBFH" --batch local --mergeYears --ext $tag #--doSystematics --skipZeroes 
    python makeDatacard.py --years 2016,2017,2018 --ext $tag --prune --pruneThreshold 0.000000001 --doSystematics
 	 python prepareDatacard.py
-   mv Datacard.txt /home/users/azecchin/Analysis/inference/datacards_run2/ttHH/C2_cards/${tag}/datacard.txt
+   mv Datacard.txt /home/users/azecchin/Analysis/inference/datacards_run2/ttHH/C2_cards/${tag}/datacard_fixBR.txt
   popd
 }
 
@@ -110,7 +110,7 @@ copy_files(){
     cp Background/outdir_$tag/CMS-HGG*.root /home/users/azecchin/Analysis/inference/datacards_run2/ttHH/C2_cards/${tag}/Models/background/
 }
 
-# model_bkg
-# model_sig
+    # model_bkg
+    # model_sig
 make_datacard
 copy_files

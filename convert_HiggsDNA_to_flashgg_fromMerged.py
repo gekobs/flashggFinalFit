@@ -75,7 +75,8 @@ from collections import Counter
 
 # years = [ '2016UL_preVFP', '2017', '2018' ]
 years = [ b'2016UL_pre', b'2017', b'2018' ]
-procs_dict = {"ggH_M125": "ggH", "ttH_M125":"ttH", "VBFH_M125":"VBFH", "VH_M125":"VH", "Data":"Data",
+procs_dict = {"Data":"Data",
+              "ggH_M125": "ggH", "ttH_M125":"ttH", "VBFH_M125":"VBFH", "VH_M125":"VH", 
               "ttHH_ggbb": "ttHHheftSM",
               "ttHH_HEFT_c2_1_ggbb": "ttHHheft1",
               "ttHH_HEFT_c2_2_ggbb": "ttHHheft2",
@@ -98,7 +99,7 @@ parser.add_argument(
     "--input",
     help = "path to input parquet directory",
     type = str,
-    default = "/home/users/azecchin/Analysis/HiggsDNA/output/heft_presel_FF_syst_condor/"
+    default = "/home/users/azecchin/Analysis/HiggsDNA/output/heft_presel_FF_syst_condor_MVAscore/"
 )
 
 parser.add_argument(
@@ -109,7 +110,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "--mvas",
-  nargs="*",
+    nargs="*",
     help = "mva limits to SRs",
     type = float,
     default = [0.9903,  0.966974]  
@@ -121,16 +122,13 @@ parser.add_argument(
     default = 2
 )
 
-#TODO here: we want to open 1 big file, take the all the data (process_id==0) and the rest of the processes divided
-# by year. Use summary.json for mapping process name to process_id 
-
 args = parser.parse_args()
 
 args.mvas+=[99]
 args.mvas.sort(reverse=True)
 
-out_dir = "/home/users/azecchin/Analysis/FinalFit/CMSSW_10_2_13/src/flashggFinalFit/files_systs/" + str(args.tag) + "/"
-#out_dir = '/home/users/fsetti/HHggTauTau/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/' + str(args.tag) + '/'
+out_dir = "/home/users/azecchin/Analysis/FinalFit/CMSSW_10_2_13/src/flashggFinalFit/files_systs/"+ str(args.tag) + "/"
+#out_dir = '/home/users/fsetti/HHggTauTau/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/'+ str(args.tag) + '/'
 
 os.system("rm -rf %s"%(out_dir))
 os.system("mkdir -p %s"%(out_dir))
@@ -143,22 +141,20 @@ os.system("mkdir -p %s/2018"%(out_dir))
 with open(str(args.input)+'/summary.json',"r") as f_in:
   procs_id_map = json.load(f_in)
 procs = procs_id_map["sample_id_map"]
-print ("procs {}".format(procs))
+# print ("procs {}".format(procs))
 
 #Process Data
-file = pandas.read_parquet(str(args.input)+'merged_nominal.parquet', engine='pyarrow') # no systematics on Data
+#no systematics on Data
+file = pandas.read_parquet(str(args.input)+'merged_nominal.parquet', engine='pyarrow') 
 print(file)
 df=file[ (file.process_id == 0) ]
-df['CMS_hgg_mass'] = df.Diphoton_mass
+df['CMS_hgg_mass'] = df['Diphoton_mass']
 for sr in range(args.nSRs):
   dfs = df.loc[ ( df.mva_score < args.mvas[sr] ) & ( df.mva_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) ]
   print("Adding {} events to allData".format(len(dfs)))
   dfs.to_root(out_dir+'/Data/'+'/allData.root',key='Data_13TeV_SR'+str(sr+1), mode='a')
 
 #Process MCs
-
-# I think we need to first open the files, then loop over the process and years
-#get all files including systematic variations
 files = glob.glob(str(args.input)+'/*.parquet')
 for file_ in files:
   glob_df = pandas.read_parquet(file_, engine='pyarrow')
@@ -205,7 +201,10 @@ for file_ in files:
       df['CMS_hgg_mass'] = df['Diphoton_mass']
       df['dZ'] = np.ones(len(df['Diphoton_mass']))
       df['weight'] = df['weight_central'] * 2
-      df['weight_central'] = df['weight'] 
+      if "ttHH_HEFT" in proc: #selecting HEFT inputs
+        print ("\033[93m \n\n Rescaling HEFT input {} to bbgg BR \033[0m".format(proc))
+        df['weight'] = df['weight']*0.002651 #ggbb BR
+      df['weight_central'] = df['weight']
       yield_systematics = [ key for key in df.keys() if ( "weight_" in key ) and ( "_up" in key or "_down" in key )]
       rename_sys = {}
       for sys in yield_systematics:

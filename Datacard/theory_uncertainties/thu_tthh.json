@@ -1,0 +1,15 @@
+{
+  
+    "ttHH_ggTauTau":{
+        "QCDscale_ttHH":[1.015,0.957],
+        "alphaS_pdf_ttHH":[1.032,0.968]
+    },
+    "ttHH_ggWW":{
+        "QCDscale_ttHH":[1.015,0.957],
+        "alphaS_pdf_ttHH":[1.032,0.968]
+    },
+    "ttHH_ggbb":{
+        "QCDscale_ttHH":[1.015,0.957],
+        "alphaS_pdf_ttHH":[1.032,0.968]
+    }
+}
