@@ -5,8 +5,9 @@ set -x
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 #source /vols/grid/cms/setup.sh
 
-tag=SM_23Sep22_with_HHggXX
-trees=/home/users/iareed/ttHHggbb/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/$tag/
+tag=SM_23Sep22_with_HHGGXX_new_dir
+#trees=/home/users/iareed/ttHHggbb/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/$tag/
+trees=/home/users/iareed/CMSSW_10_2_13/src/flashggFinalFit/files_systs/$tag/
 
 cmsenv
 source setup.sh
@@ -28,8 +29,9 @@ model_bkg(){
 
 #Construct Signal Models (one per year)
 model_sig(){
-        procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH" "HHggbb" "HHggWWSemileptonic" "HHggWWDileptonic" "HHggTauTau")
-        #procs=("ttHHggbb" "ttH") #Min set for debugging
+        #procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH" "HHggbb" "HHggWWSemileptonic" "HHggWWDileptonic" "HHggTauTau")
+        procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH")
+        #procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH" "HHGGbb" "HHGGWWSemileptonic" "HHGGWWDileptonic" "HHGGTauTau")
 
 	for year in 2016 2017 2018
 	#for year in 2016   #Careful: I was running into errors when debugging with only one year
