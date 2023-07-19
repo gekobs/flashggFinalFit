@@ -30,8 +30,8 @@ model_bkg(){
 #Construct Signal Models (one per year)
 model_sig(){
         #procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH" "HHggbb" "HHggWWSemileptonic" "HHggWWDileptonic" "HHggTauTau")
-        procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH")
-        #procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH" "HHGGbb" "HHGGWWSemileptonic" "HHGGWWDileptonic" "HHGGTauTau")
+        #procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH")
+        procs=("ttHHggbb" "ttHHggWW" "ttHHggTauTau" "ggH" "ttH" "VBFH" "VH" "HHGGbb" "HHGGWWsemileptonic" "HHGGWWdileptonic" "HHGGTauTau")
 
 	for year in 2016 2017 2018
 	#for year in 2016   #Careful: I was running into errors when debugging with only one year
@@ -111,15 +111,15 @@ run_combine(){
 syst_plots(){
 	pushd Combine
 		text2workspace.py Datacard.txt -m 125
-		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -2 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1
-		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -2 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10
+		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1
+		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10
 
 		#combineTool.py  -t -1 --setParameters r=100.0 -M Impacts -d Datacard.root --redefineSignalPOI r --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1
 		#combineTool.py  -t -1 --setParameters r=100.0 -M Impacts -d Datacard.root --redefineSignalPOI r --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1   --doFits --parallel 10
 
 		combineTool.py -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -2 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH -o impacts.json 
 
-		plotImpacts.py -i impacts.json -o impacts
+		plotImpacts.py -i impacts.json -o impacts --blind
 		mkdir -p /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/
 		cp impacts.pdf /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/impacts.pdf
 	popd	
@@ -136,9 +136,9 @@ copy_plot(){
 	cp /home/users/iareed/public_html/ttHH/index.php /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/Signal
 }
 
-model_bkg
+#model_bkg
 model_sig
 make_datacard
 run_combine
-syst_plots
-copy_plot
+#syst_plots
+#copy_plot
