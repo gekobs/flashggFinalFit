@@ -111,15 +111,15 @@ run_combine(){
 syst_plots(){
 	pushd Combine
 		text2workspace.py Datacard.txt -m 125
-		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1
-		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10
+		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin 1 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1
+		combineTool.py  --expectSignal 1 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin 1 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10
 
 		#combineTool.py  -t -1 --setParameters r=100.0 -M Impacts -d Datacard.root --redefineSignalPOI r --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1
 		#combineTool.py  -t -1 --setParameters r=100.0 -M Impacts -d Datacard.root --redefineSignalPOI r --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1   --doFits --parallel 10
+                rm impacts.json
+		combineTool.py -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --expectSignal 1 -t -1 --rMin 1 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH -o impacts.json 
 
-		combineTool.py -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -2 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH -o impacts.json 
-
-		plotImpacts.py -i impacts.json -o impacts --blind
+		plotImpacts.py -i impacts.json -o impacts 
 		mkdir -p /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/
 		cp impacts.pdf /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/impacts.pdf
 	popd	
@@ -137,8 +137,8 @@ copy_plot(){
 }
 
 #model_bkg
-model_sig
-make_datacard
+#model_sig
+#make_datacard
 run_combine
-#syst_plots
+syst_plots
 #copy_plot
