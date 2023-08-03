@@ -5,7 +5,8 @@ set -x
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 #source /vols/grid/cms/setup.sh
 
-tag=SM_23Sep22_with_HHGGXX_new_dir
+#tag=SM_23Sep22_with_HHGGXX_new_dir
+tag=SM_23Sep22_fixed_lf_and_hf
 #trees=/home/users/iareed/ttHHggbb/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/$tag/
 trees=/home/users/iareed/CMSSW_10_2_13/src/flashggFinalFit/files_systs/$tag/
 
@@ -100,7 +101,7 @@ make_datacard(){
 	 rm -rf yields_$tag
          rm Datacard.txt
 
-	 python RunYields.py --inputWSDirMap 2016=${trees}/ws_signal_2016,2017=${trees}/ws_signal_2017,2018=${trees}/ws_signal_2018 --cats SR2 --procs auto --batch local --mergeYears --skipZeroes --ext $tag --doSystematics 
+	 python RunYields.py --inputWSDirMap 2016=${trees}/ws_signal_2016,2017=${trees}/ws_signal_2017,2018=${trees}/ws_signal_2018 --cats auto --procs auto --batch local --mergeYears --skipZeroes --ext $tag --doSystematics 
    #python RunYields.py --inputWSDirMap 2016=${trees}/ws_signal_2016,2017=${trees}/ws_signal_2017,2018=${trees}/ws_signal_2018 --cats auto --procs "HHggTauTau,HHggWWdileptonic,ggH,ttH,VH,VBFH" --batch local --mergeYears --ext $tag --doSystematics --skipZeroes
 
 	 python makeDatacard.py --years 2016,2017,2018 --ext $tag --prune --pruneThreshold 0.00001 --doSystematics
@@ -121,8 +122,8 @@ run_combine(){
 		python RunText2Workspace.py --mode  ggtt_resBkg_syst --dryRun
 		./t2w_jobs/t2w_ggtt_resBkg_syst.sh
 
-		combine --redefineSignalPOI r --cminDefaultMinimizerStrategy 0 -M AsymptoticLimits -m 125 -d Datacard_ggtt_resBkg_syst.root -n _AsymptoticLimit_r --freezeParameters MH --run=blind > combine_results_${tag}.txt
-		combine --redefineSignalPOI r --cminDefaultMinimizerStrategy 0 -M AsymptoticLimits -m 125 -d Datacard_ggtt_resBkg_syst.root -n _AsymptoticLimit_r --freezeParameters allConstrainedNuisances --run=blind > stat_only_${tag}.txt
+		combine --redefineSignalPOI r  -M AsymptoticLimits -m 125 -d Datacard_ggtt_resBkg_syst.root -n _AsymptoticLimit_r --freezeParameters MH --run=blind > combine_results_${tag}.txt --cminDefaultMinimizerStrategy 0 --X-rtd MINIMIZER_freezeDisassociatedParams --X-rtd MINIMIZER_multiMin_hideConstants --X-rtd MINIMIZER_multiMin_maskConstraints --X-rtd MINIMIZER_multiMin_maskChannels=2
+		combine --redefineSignalPOI r  -M AsymptoticLimits -m 125 -d Datacard_ggtt_resBkg_syst.root -n _AsymptoticLimit_r --freezeParameters allConstrainedNuisances --run=blind > stat_only_${tag}.txt --cminDefaultMinimizerStrategy 0 --X-rtd MINIMIZER_freezeDisassociatedParams --X-rtd MINIMIZER_multiMin_hideConstants --X-rtd MINIMIZER_multiMin_maskConstraints --X-rtd MINIMIZER_multiMin_maskChannels=2
 
                 # Likelyhood scan parts
 		#combine --expectSignal 1 -t -1 --redefineSignalPOI r --cminDefaultMinimizerStrategy 0 -M MultiDimFit --algo grid --points 100 -m 125 -d Datacard_ggtt_resBkg_syst.root -n _Scan_r --freezeParameters MH --rMin 0 --rMax 5
@@ -136,13 +137,17 @@ run_combine(){
 syst_plots(){
 	pushd Combine
 		text2workspace.py Datacard.txt -m 125
-		combineTool.py  --setParameters r=260.0 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1
-		combineTool.py  --setParameters r=260.0 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10
+		combineTool.py  --setParameters r=88.0 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --rMax 200 --squareDistPoiStep -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1 --cminDefaultMinimizerStrategy 0 --X-rtd MINIMIZER_freezeDisassociatedParams --X-rtd MINIMIZER_multiMin_hideConstants --X-rtd MINIMIZER_multiMin_maskConstraints --X-rtd MINIMIZER_multiMin_maskChannels=2
+		combineTool.py  --setParameters r=88.0 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --rMax 200 --squareDistPoiStep -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10 --cminDefaultMinimizerStrategy 0 --X-rtd MINIMIZER_freezeDisassociatedParams --X-rtd MINIMIZER_multiMin_hideConstants --X-rtd MINIMIZER_multiMin_maskConstraints --X-rtd MINIMIZER_multiMin_maskChannels=2
+		#combineTool.py  --setParameters r=1.0 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --rMax 300 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1 --robustHesse 1
+		#combineTool.py  --setParameters r=1.0 -t -1 -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --rMin -10 --rMax 300 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1 --robustHesse 1 --doFits --parallel 10
+
 
 		#combineTool.py  -t -1 --setParameters r=100.0 -M Impacts -d Datacard.root --redefineSignalPOI r --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --doInitialFit --robustFit 1
 		#combineTool.py  -t -1 --setParameters r=100.0 -M Impacts -d Datacard.root --redefineSignalPOI r --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH --robustFit 1   --doFits --parallel 10
                 rm impacts.json
-		combineTool.py -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --setParameters r=260.0 -t -1 --rMin -10 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH -o impacts.json 
+		combineTool.py -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --setParameters r=88.0 -t -1 --rMin -10 --rMax 200 --squareDistPoiStep -m 125 --freezeParameters MH -o impacts.json --cminDefaultMinimizerStrategy 0 --X-rtd MINIMIZER_freezeDisassociatedParams --X-rtd MINIMIZER_multiMin_hideConstants --X-rtd MINIMIZER_multiMin_maskConstraints --X-rtd MINIMIZER_multiMin_maskChannels=2
+		#combineTool.py -M Impacts -d Datacard.root --redefineSignalPOI r --autoMaxPOIs "r" --setParameters r=260.0 -t -1 --rMin -10 --rMax 300 --squareDistPoiStep --cminDefaultMinimizerStrategy 0 -m 125 --freezeParameters MH -o impacts.json 
 
 		plotImpacts.py -i impacts.json -o impacts 
 		mkdir -p /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/
@@ -161,8 +166,8 @@ copy_plot(){
 	cp /home/users/iareed/public_html/ttHH/index.php /home/users/iareed/public_html/ttHH/flashggFinalFit/$tag/Signal
 }
 
-#model_bkg
-#model_sig
+model_bkg
+model_sig
 make_datacard
 run_combine
 syst_plots
