@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/users/iareed/CMSSW_10_2_13/src/flashggFinalFit/Combine
+cd /home/users/azecchin/Analysis/BiasStudy/CMSSW_10_2_13/src/flashggFinalFit/Combine
 
 eval `scramv1 runtime -sh`
 
